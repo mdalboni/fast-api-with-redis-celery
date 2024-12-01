@@ -57,7 +57,8 @@ make run_tests_with_coverage_in_docker
 ## Endpoints
 
 ### HTTP files 
-You can use the .HTTP
+You can use the .http files in the apis folder to test the endpoints.
+
 ### Postman Collection
 You can import the postman collection from the file `postman_collection.json` in the apis folder.
 
@@ -66,7 +67,7 @@ You can import the postman collection from the file `postman_collection.json` in
 1. Exception handling
    1. Custom exceptions for extra clarity
 2. Logging
-    1. Clean up the logger config and add more logs
+   1. Clean up the logger config and add more logs
 3. Tests
    1. Add more tests to cover more scenarios
    2. Remove the redis dependency from the tests
