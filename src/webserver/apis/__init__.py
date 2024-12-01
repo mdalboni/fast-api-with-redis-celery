@@ -1,1 +1,1 @@
-from .events_api.events_handler import router as events_router #noqa
+from .event_logger_api.event_logger_handler import router as events_router #noqa

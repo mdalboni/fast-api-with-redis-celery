@@ -1,8 +1,9 @@
-### PATCH request to create an event
-PATCH /v1/events/0674cbdc-00d2-75de-8000-1cf4f064ab0b HTTP/1.1
+### GET event by id
+GET /v1/events/0674cb79-54af-794f-8000-14b298b8f5b6 HTTP/1.1
 Host: localhost:8000
-Content-Type: application/json
 
-{
-    "status": "pending"
-}
+
+### GET all events with query parameters
+GET /v1/events?page=0&limit=10 HTTP/1.1
+Host: localhost:8000
+

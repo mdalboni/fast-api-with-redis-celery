@@ -1,6 +1,6 @@
 from typing import Generic, Optional, TypeVar
 
-from pydantic import BaseModel
+from pydantic import BaseModel, model_validator
 
 M = TypeVar("M", bound=BaseModel)
 
@@ -15,11 +15,23 @@ class BaseGenericResponse(BaseModel):
     ...
 
 
+class GenericErrorResponse(BaseModel):
+    error: ErrorResponse
+
+
 class GenericSingleResponse(BaseGenericResponse, Generic[M]):
-    data: Optional[M] = None
-    error: Optional[ErrorResponse] = None
+    data: M = None
+
+    @model_validator(mode='before')  # noqa
+    @classmethod
+    def handle_data(cls, data):
+        return {'data': data}
 
 
 class GenericMultipleResponse(BaseGenericResponse, Generic[M]):
-    data: Optional[list[M]] = None
-    error: Optional[ErrorResponse] = None
+    data: list[M] = None
+
+    @model_validator(mode='before')  # noqa
+    @classmethod
+    def handle_data(cls, data):
+        return {'data': data}

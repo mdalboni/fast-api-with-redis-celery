@@ -2,10 +2,10 @@ from typing import Literal
 
 from pydantic import BaseModel, Field, field_validator
 
-
 EventLoggerStatuses = Literal['pending', 'processed', 'failed', 'updated']
 
-class PostEventInput(BaseModel):
+
+class PostEventLoggerInput(BaseModel):
     user_id: str = Field(min_length=1)
     description: str = Field(min_length=5)
 
@@ -22,17 +22,18 @@ class PostEventInput(BaseModel):
         return v
 
 
-class PostEventOutput(BaseModel):
+class PostEventLoggerResponse(BaseModel):
     event_id: str
 
 
-class PatchEventByIdInput(BaseModel):
+class PatchEventLoggerByIdInput(BaseModel):
     status: EventLoggerStatuses
 
 
-class EventOutput(BaseModel):
-    class Config:
-        extra = 'ignore'
+class EventLoggerResponse(BaseModel):
+    model_config = {
+        'extra': 'ignore'
+    }
 
     event_id: str
     user_id: str
@@ -40,7 +41,7 @@ class EventOutput(BaseModel):
     status: EventLoggerStatuses
 
 
-class EventListOutput(BaseModel):
-    events: list[EventOutput]
+class EventLoggerListResponse(BaseModel):
+    events: list[EventLoggerResponse]
     more_pages: bool
     total_items: int

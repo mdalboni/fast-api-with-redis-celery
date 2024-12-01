@@ -1,16 +1,32 @@
-version: '3.8'
-
 services:
-  web-service:
+  redis:
+    image: redis:6.2.6
+    ports:
+      - "6379:6379"
+
+  celery:
     build:
       context: ..
-      dockerfile: infrastructure/Dockerfile
-      args:
-        DATABASE_URL: $DATABASE_URL
-    command: python manage.py runserver 0.0.0.0:8000
+      dockerfile: infrastructure/dev.Dockerfile
+    command: make run_celery
+    volumes:
+      - ..:/usr/src/app/
+    env_file:
+      - ../.env.dev
+    depends_on:
+      - redis
+
+  fastapi:
+    build:
+      context: ..
+      dockerfile: infrastructure/dev.Dockerfile
+    command: make run_fastapi
     volumes:
       - ..:/usr/src/app/
     ports:
       - "8000:8000"
     env_file:
       - ../.env.dev
+    depends_on:
+      - redis
+      - celery

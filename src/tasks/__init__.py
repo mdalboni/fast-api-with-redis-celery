@@ -1,1 +1,1 @@
-from .event_tasks import *  # noqa
+from .event_logger_tasks import *  # noqa

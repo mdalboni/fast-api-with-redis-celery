@@ -1,9 +1,8 @@
-### POST request to create an event
-POST /v1/events/ HTTP/1.1
+### PATCH request to create an event
+PATCH /v1/events/0674cbdc-00d2-75de-8000-1cf4f064ab0b HTTP/1.1
 Host: localhost:8000
 Content-Type: application/json
 
 {
-    "user_id": "123",
-    "description": "123423123"
+    "status": "pending"
 }
