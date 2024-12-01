@@ -1,0 +1,1 @@
+from .events_api.events_handler import router as events_router #noqa

@@ -1,0 +1,9 @@
+### POST request to create an event
+POST /v1/events/ HTTP/1.1
+Host: localhost:8000
+Content-Type: application/json
+
+{
+    "user_id": "123",
+    "description": "123423123"
+}
