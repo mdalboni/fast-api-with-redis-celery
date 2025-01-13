@@ -79,4 +79,4 @@ class EventLoggerService:
             self.redis_client.get_redis_object(key, EventLoggerRedis, append_key=False)
             for key in keys
         ]
-        return events, more_pages, total_items  # noqa
+        return events, more_pages, total_items

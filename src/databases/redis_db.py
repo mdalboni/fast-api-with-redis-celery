@@ -1,10 +1,11 @@
-from typing import Type
+from typing import Type, TypeVar
 
 from redis import StrictRedis
 
 from src.exceptions import RedisObjectNotFound
 from src.utils.redis_objects import RedisObject
 
+T = TypeVar('T', bound=RedisObject)
 
 class CustomRedis(StrictRedis):
     """
@@ -21,7 +22,7 @@ class CustomRedis(StrictRedis):
         """
         return self.hset(redis_object.key, mapping=redis_object.serialize())
 
-    def get_redis_object(self, key: str, redis_object: Type[RedisObject], append_key=True) -> RedisObject:
+    def get_redis_object(self, key: str, redis_object: Type[T], append_key=True) -> T:
         """
         Get an object from Redis.
         :param append_key: Append key to redis_object.redis_key for searching
